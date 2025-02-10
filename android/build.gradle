@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23'
+        classpath 'com.google.gms:google-services:4.4.1'
+        
+    }
+}
+
+plugins {
+    id 'base'
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Optional: Set build directory (consider removing or using a project-relative path)
+rootProject.buildDir = "build"
+
+subprojects {
+    // Optional: Override build directory for subprojects
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    
+    // Optional: Force subprojects to depend on ':app' during evaluation
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
+}
+
+ext.kotlin_version = '1.9.23'
